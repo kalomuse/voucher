@@ -1,0 +1,10 @@
+              {
+ "content":[
+        {"title":"猜你喜欢", 
+          "list":[
+                {"imgSrc":"../img/content1.png","text":"专场推荐","url":"mine.html","state":"sss","date":"2017-12","usestate":"mine.html"},
+                {"imgSrc":"../img/content1.png","text":"专场推荐","url":"mine.html","state":"sss","date":"2017-12","usestate":"mine.html"}
+            ]
+        }
+    ]
+}

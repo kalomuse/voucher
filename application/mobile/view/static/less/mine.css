@@ -1,0 +1,282 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+img {
+  width: 100%;
+}
+[data-dpr='1'] main,
+[data-dpr='1'] header {
+  min-width: 320px;
+  max-width: 640px;
+}
+a:hover,
+a:focus {
+  color: #fff;
+  text-decoration: none;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+body {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+header,
+footer {
+  width: 100%;
+}
+header .header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  padding: 0.3125rem 0.3125rem;
+  align-items: center;
+  background-color: #fff;
+}
+header .header .h-left {
+  height: 0.625rem;
+  width: 0.625rem;
+  background: url('../img/headerimg/icon_back_n.png') no-repeat;
+  background-size: contain;
+}
+header .header .h-mid {
+  flex: 1;
+  text-align: center;
+  width: 50%;
+  font-size: 0.5rem;
+}
+header .header .h-right a {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  height: 1rem;
+  align-items: center;
+}
+header .header .h-right a .h-icon {
+  color: #ccc;
+  font-size: 0.625rem;
+}
+main {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  overflow-y: auto;
+}
+footer {
+  border-top: 1px solid #ccc;
+}
+footer ul {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  margin-bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+footer ul li {
+  width: 25%;
+}
+footer ul li a {
+  display: block;
+}
+footer ul li .nav {
+  text-align: center;
+  padding: 0.15625rem 0;
+}
+footer ul li .nav .icon {
+  width: 0.625rem;
+  height: 0.625rem;
+  overflow: hidden;
+  margin: 0 auto 0.09375rem;
+  background: url(../img/footerimg/spr1_5b2e09c.png);
+  background-size: 0.625rem 5rem;
+}
+footer ul li .nav span {
+  display: block;
+  color: #000;
+  font-size: 0.34375rem;
+}
+footer ul li .nav .fl {
+  background-position-y: -0.625rem;
+}
+footer ul li .nav .fl-act {
+  background-position-y: 0rem;
+}
+footer ul li .nav .sy {
+  background-position-y: -4.375rem;
+}
+footer ul li .nav .sy-act {
+  background-position-y: -3.75rem;
+}
+footer ul li .nav .cart {
+  background-position-y: -1.875rem;
+}
+footer ul li .nav .cart-act {
+  background-position-y: -1.25rem;
+}
+footer ul li .nav .mine {
+  background-position-y: -3.125rem;
+}
+footer ul li .nav .mine-act {
+  background-position-y: -2.5rem;
+}
+.header .h-right {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+}
+.header .h-right .listslide {
+  padding: 0.15625rem;
+  border: 1px solid #ff5722;
+  font-size: 0.375rem;
+  width: 1.5625rem;
+  text-align: center;
+}
+.actived {
+  color: #FF5722;
+  border-bottom: 2px solid #FF5722;
+}
+main {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  overflow-y: auto;
+  background-color: #f1f2f7;
+}
+main .yhq,
+main .cjq,
+main .dd {
+  background-color: #ebebeb;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+main .yhq .isnull,
+main .cjq .isnull,
+main .dd .isnull {
+  background-color: #ebebeb;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+main .yhq .isnull span:nth-child(1),
+main .cjq .isnull span:nth-child(1),
+main .dd .isnull span:nth-child(1) {
+  background: url(../img/cartimg/1.png) no-repeat 0 center;
+  color: rgba(0, 0, 0, 0.27);
+  padding: 0.3125rem 0.15625rem 0.3125rem 1.875rem;
+}
+main .yhq .isnull span:nth-child(2),
+main .cjq .isnull span:nth-child(2),
+main .dd .isnull span:nth-child(2) {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #ccc;
+  padding: 0.15625rem 0.3125rem;
+}
+main .yhq .yhqlist,
+main .cjq .yhqlist,
+main .dd .yhqlist,
+main .yhq .cjqlist,
+main .cjq .cjqlist,
+main .dd .cjqlist,
+main .yhq .ddlist,
+main .cjq .ddlist,
+main .dd .ddlist {
+  width: 100%;
+  padding: 0.15625rem;
+}
+main .yhq .yhqlist .shop-main,
+main .cjq .yhqlist .shop-main,
+main .dd .yhqlist .shop-main,
+main .yhq .cjqlist .shop-main,
+main .cjq .cjqlist .shop-main,
+main .dd .cjqlist .shop-main,
+main .yhq .ddlist .shop-main,
+main .cjq .ddlist .shop-main,
+main .dd .ddlist .shop-main {
+  padding-bottom: 0.15625rem;
+}
+main .yhq .yhqlist .shop-main .goodslist,
+main .cjq .yhqlist .shop-main .goodslist,
+main .dd .yhqlist .shop-main .goodslist,
+main .yhq .cjqlist .shop-main .goodslist,
+main .cjq .cjqlist .shop-main .goodslist,
+main .dd .cjqlist .shop-main .goodslist,
+main .yhq .ddlist .shop-main .goodslist,
+main .cjq .ddlist .shop-main .goodslist,
+main .dd .ddlist .shop-main .goodslist {
+  background-color: #fff;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+}
+main .yhq .yhqlist .shop-main .goodslist .shop-pic,
+main .cjq .yhqlist .shop-main .goodslist .shop-pic,
+main .dd .yhqlist .shop-main .goodslist .shop-pic,
+main .yhq .cjqlist .shop-main .goodslist .shop-pic,
+main .cjq .cjqlist .shop-main .goodslist .shop-pic,
+main .dd .cjqlist .shop-main .goodslist .shop-pic,
+main .yhq .ddlist .shop-main .goodslist .shop-pic,
+main .cjq .ddlist .shop-main .goodslist .shop-pic,
+main .dd .ddlist .shop-main .goodslist .shop-pic {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+main .yhq .yhqlist .shop-main .goodslist .shop-pic img,
+main .cjq .yhqlist .shop-main .goodslist .shop-pic img,
+main .dd .yhqlist .shop-main .goodslist .shop-pic img,
+main .yhq .cjqlist .shop-main .goodslist .shop-pic img,
+main .cjq .cjqlist .shop-main .goodslist .shop-pic img,
+main .dd .cjqlist .shop-main .goodslist .shop-pic img,
+main .yhq .ddlist .shop-main .goodslist .shop-pic img,
+main .cjq .ddlist .shop-main .goodslist .shop-pic img,
+main .dd .ddlist .shop-main .goodslist .shop-pic img {
+  width: 100%;
+  height: 100%;
+}
+main .yhq .yhqlist .shop-main .goodslist .shopmain,
+main .cjq .yhqlist .shop-main .goodslist .shopmain,
+main .dd .yhqlist .shop-main .goodslist .shopmain,
+main .yhq .cjqlist .shop-main .goodslist .shopmain,
+main .cjq .cjqlist .shop-main .goodslist .shopmain,
+main .dd .cjqlist .shop-main .goodslist .shopmain,
+main .yhq .ddlist .shop-main .goodslist .shopmain,
+main .cjq .ddlist .shop-main .goodslist .shopmain,
+main .dd .ddlist .shop-main .goodslist .shopmain {
+  flex: 1;
+  padding-left: 0.25rem;
+}
+main .yhq .yhqlist .shop-main .goodslist .shopmain .shopn,
+main .cjq .yhqlist .shop-main .goodslist .shopmain .shopn,
+main .dd .yhqlist .shop-main .goodslist .shopmain .shopn,
+main .yhq .cjqlist .shop-main .goodslist .shopmain .shopn,
+main .cjq .cjqlist .shop-main .goodslist .shopmain .shopn,
+main .dd .cjqlist .shop-main .goodslist .shopmain .shopn,
+main .yhq .ddlist .shop-main .goodslist .shopmain .shopn,
+main .cjq .ddlist .shop-main .goodslist .shopmain .shopn,
+main .dd .ddlist .shop-main .goodslist .shopmain .shopn {
+  font-size: 0.375rem;
+  color: #000;
+}
+main .con {
+  height: 100%;
+}

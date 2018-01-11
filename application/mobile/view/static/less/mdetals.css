@@ -1,0 +1,312 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+img {
+  width: 100%;
+}
+[data-dpr='1'] main,
+[data-dpr='1'] header {
+  min-width: 320px;
+  max-width: 640px;
+}
+a:hover,
+a:focus {
+  color: #fff;
+  text-decoration: none;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+body {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+header,
+footer {
+  width: 100%;
+}
+header .header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  padding: 0.3125rem 0.3125rem;
+  align-items: center;
+  background-color: #fff;
+}
+header .header .h-left {
+  height: 0.625rem;
+  width: 0.625rem;
+  background: url('../img/headerimg/icon_back_n.png') no-repeat;
+  background-size: contain;
+}
+header .header .h-mid {
+  flex: 1;
+  text-align: center;
+  width: 50%;
+  font-size: 0.5rem;
+}
+header .header .h-right a {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  height: 1rem;
+  align-items: center;
+}
+header .header .h-right a .h-icon {
+  color: #ccc;
+  font-size: 0.625rem;
+}
+main {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  overflow-y: auto;
+}
+footer {
+  border-top: 1px solid #ccc;
+}
+footer ul {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  margin-bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+footer ul li {
+  width: 25%;
+}
+footer ul li a {
+  display: block;
+}
+footer ul li .nav {
+  text-align: center;
+  padding: 0.15625rem 0;
+}
+footer ul li .nav .icon {
+  width: 0.625rem;
+  height: 0.625rem;
+  overflow: hidden;
+  margin: 0 auto 0.09375rem;
+  background: url(../img/footerimg/spr1_5b2e09c.png);
+  background-size: 0.625rem 5rem;
+}
+footer ul li .nav span {
+  display: block;
+  color: #000;
+  font-size: 0.34375rem;
+}
+footer ul li .nav .fl {
+  background-position-y: -0.625rem;
+}
+footer ul li .nav .fl-act {
+  background-position-y: 0rem;
+}
+footer ul li .nav .sy {
+  background-position-y: -4.375rem;
+}
+footer ul li .nav .sy-act {
+  background-position-y: -3.75rem;
+}
+footer ul li .nav .cart {
+  background-position-y: -1.875rem;
+}
+footer ul li .nav .cart-act {
+  background-position-y: -1.25rem;
+}
+footer ul li .nav .mine {
+  background-position-y: -3.125rem;
+}
+footer ul li .nav .mine-act {
+  background-position-y: -2.5rem;
+}
+.header .h-mid {
+  width: 50%;
+}
+.header .h-right {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+}
+.header .h-right .listslide {
+  padding: 0.15625rem;
+  border: 1px solid #ff5722;
+  font-size: 0.375rem;
+  width: 1.5625rem;
+  text-align: center;
+}
+.header .h-right .kf {
+  padding: 0.15625rem;
+  font-size: 0.375rem;
+}
+.sub-header {
+  background-color: #fafafa;
+  overflow-y: hidden;
+}
+.sub-header .sub-list {
+  overflow-x: scroll;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  margin-bottom: 0.09375rem;
+}
+.sub-header .sub-list .listslide {
+  display: inline-block;
+  font-size: 0.4375rem;
+  text-align: center;
+  flex: 0 0 1rem;
+  margin: 0 0.25rem;
+}
+.sub-header .sub-list .morewords {
+  flex: 0 0 2rem;
+}
+.actived {
+  color: #FF5722;
+  border-bottom: 2px solid #FF5722;
+}
+.actives {
+  background-color: #ffb03f;
+}
+main {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  overflow-y: auto;
+  background-color: #f1f2f7;
+}
+main .content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+}
+main .content img {
+  height: 6.25rem;
+}
+main .content .hdcontent {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  algin-items: center;
+}
+main .content .hdcontent em {
+  text-decoration: line-through;
+}
+main .content .hdcontent div {
+  background-color: #fff;
+  padding: 0.15625rem;
+}
+main .content .hdcontent div:nth-child(1) {
+  height: 0.9375rem;
+  line-height: 0.9375rem;
+  font-size: 0.5rem;
+}
+main .content .hdcontent div:nth-child(2) {
+  color: #000;
+  font-size: 0.375rem;
+}
+main .content .hdcontent div:nth-child(2) span:nth-child(1) .pricef {
+  font-size: 0.5rem;
+  color: red;
+}
+main .content .hdcontent div:nth-child(2) span:nth-child(1) .price {
+  font-size: 0.4375rem;
+  color: red;
+}
+main .content .hdcontent div:nth-child(2) span:nth-child(1) em {
+  color: #ccc;
+}
+main .content .hdcontent div:nth-child(2) span:nth-child(1) .num {
+  font-size: 0.4375rem;
+  color: yellow;
+}
+main .content .hdcontent div:nth-child(2) span:nth-child(1) .xsnum {
+  font-size: 0.4375rem;
+  color: green;
+}
+main .content .hdcontent div:nth-child(3) {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  algin-items: center;
+  justify-content: center;
+  padding: 0.15625rem 0;
+}
+main .content .hdcontent div:nth-child(3) span {
+  padding: 0.15625rem 0.9375rem;
+  border: 1px solid #000;
+}
+main .content .hdcontent div:nth-child(4) {
+  font-size: 0.4375rem;
+}
+main .content .hdcontent div:nth-child(5) {
+  font-size: 0.4375rem;
+}
+main .content .hdcontent div:nth-child(6) {
+  font-size: 0.4375rem;
+  color: red;
+}
+main .content .hdcontent div:nth-child(7) {
+  font-size: 0.46875rem;
+}
+main .content .hdcontent div:nth-child(7) ul {
+  list-style-type: decimal;
+}
+main .content .hdcontent div:nth-child(7) ul li {
+  list-style-position: inside;
+}
+main .dhqcontent {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+}
+main .dhqcontent img {
+  height: 6.25rem;
+}
+main .dhqcontent .title {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3125rem;
+}
+main .dhqcontent .title span {
+  color: red;
+  font-size: 0.4375rem;
+}
+main .dhqcontent input {
+  font-size: 0.4375rem;
+  width: 80%;
+  margin: 0.0625rem;
+}
+main .dhqcontent .btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.15625rem;
+}
+main .dhqcontent .btn span {
+  border: 1px solid #ccc;
+  padding: 0.15625rem 0.9375rem;
+  font-size: 0.4375rem;
+}

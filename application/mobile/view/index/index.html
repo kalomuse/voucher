@@ -1,0 +1,166 @@
+	{include file="public/header"}
+	<link rel="stylesheet" type="text/css" href="__STATIC__/less/index.css?v=3">
+	<script src="__STATIC__/js/index.js"></script>
+	<main>
+		<div class="con tj">
+			<!--轮播-->
+			<section id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+				  <ol class="carousel-indicators">
+				    <li class="active"></li>
+				    <li></li>
+				    <li></li>
+				  </ol>
+				  <div class="carousel-inner" role="listbox">
+				  </div>
+			</section>
+
+			<section class="tj-like">
+				<div class="title">猜你喜欢</div>
+			</section>
+
+			<section class="content">
+			</section>
+	</main>
+	<div class="pop">
+		<div class="pop-mask"></div>
+		<div class="pop-main">
+			<div class="pop-head">
+				<span class="pop-kf actives">客服微信</span>
+				<span class="pop-kf">客服二维码</span>
+
+			</div>
+			<div class="pop-c">
+				<div class="con">
+					<div class="pop-content-kf">
+						<div>参与活动/领奖/咨询</div>
+
+						<img src="../img/2.png">
+						<span >长按二维码添加客服微信</span>
+						<div class="tel" >合作热线：13515727953</div>
+					</div>
+
+
+				</div>
+				<div class="con ">
+					<div class="pop-content-kf">
+						<div>获取中奖/订单通知服务</div>
+
+						<img src="../img/3.jpg">
+						<span>长按二维码添加客服微信</span>
+						<div class="tel">合作热线：13515727953</div>
+					</div>
+
+				</div>
+			</div>
+
+
+		</div>
+
+	</div>
+	{include file="public/footer"}
+	<script>
+        $(function(){
+            //数据加载
+            $.ajax({
+                url:'?type',
+                type:'post',
+                dataType:'json',
+                success:function(data){
+                    var brach=$('.content');
+                    brach.html("");
+                    var data=data.content[0].list;
+
+                    for(var i = 0;i < data.length;i++)
+                    {
+                        var a=$('<a></a>');
+                        var div=$('<div class="content-pic"></div>');
+                        var img=$('<img><div style="background: #EE7621;width:100%;height:1.05rem;color:white;font-size: 0.49rem;line-height:1.05rem;">【' + data[i].remark +'】' + data[i].title+'</div>');
+                        a.attr('href',data[i].url);
+                        img.attr('src',data[i].imgSrc);
+                        div.append(img);
+                        a.append(div);
+                        brach.append(a);
+                    }
+
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            })
+
+            //数据加载
+            $.ajax({
+                url:'?',
+                type:'post',
+                dataType:'json',
+                success:function(data){
+                    console.log(data);
+                    var brach=$('.carousel-inner');
+                    brach.html("");
+                    var data=data.content[0].list;
+
+                    for(var i = 0;i < data.length;i++)
+                    {
+                        console.log(data);
+                        var div="";
+                        if(i==0){
+                            div=$('<div class="item active"></div>');
+                        }else{
+                            div=$('<div class="item"></div>');
+                        }
+                        var a=$('<a></a>');
+                        var img=$('<img>');
+                        a.attr('href',data[i].url);
+                        img.attr('src',data[i].imgSrc);
+                        a.append(img);
+                        div.append(a);
+                        brach.append(div);
+                    }
+
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            })
+
+
+
+            var startX= 0;
+            $('.carousel').on('touchstart touchend',function(e){
+                if(e.type == "touchstart"){
+                    startX = e.touches[0].clientX;
+                }else{
+                    var endX = e.changedTouches[0].clientX;
+                    //开始点和结束点的距离大于多少的时候才会判定为滑动
+                    if(Math.abs(endX - startX) > 80){
+                        //当前this代表  $('.carousel')
+                        $(this).carousel(endX > startX ? 'prev' : 'next');
+                    }
+                }
+            })
+
+            //tab栏切换
+            $('.pop .pop-main .pop-kf').on('touchend click',function(e){
+                e.preventDefault();
+                $(this).addClass('actives').siblings().removeClass('actives');
+                $('.pop .pop-main .pop-c .con').eq($(this).index()).fadeIn().siblings().hide();
+            })
+
+            //显示弹出层
+            $('.kf').on('touchend click',function(e){
+                e.preventDefault();
+                $('.pop-mask').show();
+                $('.pop-main').addClass('pop-active');
+            })
+
+            //关闭遮罩层
+            $('.close ,.pop-mask,.pop-main .add-cart').on('touchend click',function(e){
+                e.preventDefault();
+
+                $('.pop-main').removeClass('pop-active');
+                $('.pop-mask').fadeOut(500);
+
+            })
+        })
+	</script>

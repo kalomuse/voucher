@@ -1,0 +1,184 @@
+<html class="pixel-ratio-2 retina gr__wx099_h66_me"><head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>投诉</title>
+    <style>
+        *{padding:0;margin:0}img{display:block}li{list-style-type:none}a{text-decoration:none;color:#333}body{font-family:Arial,"微软雅黑";background:#f5f4f4}.cb{clear:both}.fl{float:left}.fr{float:right}.title{line-height:40px;font-size:14px}.submit{width:95%;margin:20px auto}
+        .jieguo{
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/weui/1.1.1/style/weui.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/jquery-weui/1.0.1/css/jquery-weui.min.css">
+    <script src="http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body data-gr-c-s-loaded="true">
+<div class="layout form">
+    <div class="weui-cells__title">请选择投诉原因</div>
+    <div class="weui-cells weui-cells_radio">
+        <input type="hidden" id="http_referer" value="">
+
+        <label class="weui-cell weui-check__label" for="x1">
+            <div class="weui-cell__bd">
+                <p>活动虚假、活动不真实</p>
+            </div>
+            <div class="weui-cell__ft">
+                <input type="radio" value="1" class="weui-check" name="radio1" id="x1">
+                <span class="weui-icon-checked"></span>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" for="x2">
+            <div class="weui-cell__bd">
+                <p>诱导分享、诱导关注</p>
+            </div>
+            <div class="weui-cell__ft">
+                <input type="radio" value="2" class="weui-check" name="radio1" id="x2">
+                <span class="weui-icon-checked"></span>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" for="x3">
+            <div class="weui-cell__bd">
+                <p>欺诈、违法</p>
+            </div>
+            <div class="weui-cell__ft">
+                <input type="radio" value="3" class="weui-check" name="radio1" id="x3">
+                <span class="weui-icon-checked"></span>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" for="x4">
+            <div class="weui-cell__bd">
+                <p>色情、暴力</p>
+            </div>
+            <div class="weui-cell__ft">
+                <input type="radio" value="4" class="weui-check" name="radio1" id="x4">
+                <span class="weui-icon-checked"></span>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" for="x99">
+            <div class="weui-cell__bd">
+                <p>其他</p>
+            </div>
+            <div class="weui-cell__ft">
+                <input type="radio" value="99" class="weui-check" name="radio1" id="x99">
+                <span class="weui-icon-checked"></span>
+            </div>
+        </label>
+    </div>
+    <div class="weui-cells__title">投诉描述</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" placeholder="" rows="3" id="desc" maxlength="200"></textarea>
+                <div class="weui-textarea-counter"><span id="wordCountShow">0</span>/200</div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells__title">联系方式</div>
+    <div class="weui-cells">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" placeholder="请填写您的联系方式，以便联系" id="contact">
+            </div>
+        </div>
+    </div>
+    <a href="javascript:;" class="weui-btn weui-btn_primary submit">提交投诉</a>
+</div>
+
+
+
+
+
+<div class="weui-msg jieguo">
+    <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+    <div class="weui-msg__text-area">
+        <h2 class="weui-msg__title">操作成功</h2>
+        <p class="weui-msg__desc"></p>
+    </div>
+    <div class="weui-msg__opr-area">
+        <p class="weui-btn-area">
+            <a href="javascript:history.go(-1);" class="weui-btn weui-btn_primary">返回</a>
+        </p>
+    </div>
+    <div class="weui-msg__extra-area">
+        <div class="weui-footer">
+
+        </div>
+    </div>
+</div>
+
+
+<script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/jquery-weui/1.0.1/js/jquery-weui.min.js"></script>
+<script>
+    var do_click = false;
+    $(".submit").on('click',function(){
+        if (do_click == true){
+            return ;
+        }
+        var yuanyin = $('[name="radio1"]:checked').val();
+        var val1 = $("#desc").val();
+        var val2 = $("#contact").val();
+        var http_referer = $("#http_referer").val();
+        if ($('[name="radio1"]:checked').length==0 || yuanyin == undefined){
+            $.toast("请选择一个投诉原因", "text");
+            return false;
+        }
+        if(yuanyin == 99 && val1==""){
+            $.toast("请填写投诉描述", "text");
+            return false;
+        }
+        if(val2==""){
+            $.toast("请填写联系方式", "text");
+            return false;
+        }
+        do_click = true;
+        var d = {
+            a1 : yuanyin,
+            a2 : val1,
+            a3 : val2,
+            a4 : http_referer
+        };
+        return alert('您的投诉已提交');
+        $.ajax({
+            type: "POST",
+            url: "",
+            data: d ,
+            timeout : 3000,
+            dataType: 'json',
+            success: function(data){
+                console.log(data);
+                do_click = false;
+                if (data.code == 'success'){
+                    //$.toast(data.msg);
+                    $("#desc").val('');
+                    $("#contact").val('');
+                    $('[name="radio1"]:checked').attr('checked',false);
+                    $('.form').hide();
+                    $('.jieguo').show();
+                }else{
+                    $.alert(data.msg);
+                }
+            }
+        });
+        //$.toast("提交成功");
+    })
+
+    $.fn.extend({
+        wordCount: function (maxLength, wordWrapper) {
+            var self = this;
+            $(self).attr("maxlength", maxLength);
+            showWordCount();
+            $(this).on("input propertychange", showWordCount);
+            function showWordCount() {
+                curLength = $(self).val().length;
+                wordWrapper.text(curLength);
+            }
+        }
+    })
+    $(function () {
+        $("#desc").wordCount(200, $("#wordCountShow"));
+    })
+</script>
+
+</body></html>

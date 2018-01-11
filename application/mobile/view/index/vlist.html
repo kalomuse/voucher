@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <script type="text/javascript" src="/public/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css">
+    <title>兑换码</title>
+</head>
+<body>
+<div class="form-horizontal" style="width: 80%;margin-left: 10%;padding-top:50px;" maxlength="6">
+    <div class="form-group">
+        <label for="code" class="col-sm-2 control-label">兑换码（6位）：</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="code" placeholder="请输入兑换码（6位）">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default" style="width: 100%" onclick="submit()">确 认</button>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    function submit() {
+        var data = {};
+        data.pwd = $('.form-horizontal').find('#code').val();
+        $.post(location.search, data, function(res) {
+            if(res.status == 'ok') {
+                alert('使用成功');
+            } else {
+                alert(res.msg);
+            }
+        });
+    }
+</script>
+</html>

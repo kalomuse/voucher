@@ -1,0 +1,47 @@
+<style>
+    #edit_table_list_2 {
+        display: none;
+    }
+</style>
+<!-- jqgrid-->
+<link href="/public/css/jqgrid/ui.jqgrid.css?0820" rel="stylesheet">
+
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="jqGrid_wrapper">
+                <table id="table_list_2"></table>
+                <div id="pager_list_2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jqGrid -->
+<script src="/public/js/jqgrid/i18n/grid.locale-cn.js?0820"></script>
+<script src="/public/js/jqgrid/jquery.jqGrid.min.js?0828"></script>
+<script src="/public/js/table.js?v=31"></script>
+<!-- Page-Level Scripts -->
+<script>
+    $(document).ready(function () {
+        var id = "table_list_2";
+        $grid = $("#table_list_2");
+
+        var config = [
+            {'str': '姓名', 'name': 'nickname'},
+            {'str': '账号', 'name': 'username'},
+            {'str': '密码', 'name': 'password',},
+            {'str': '权限', 'name':'role', edittype:'select', editoptions:{$select}, formatter:function(data) {
+                var map = {$map};
+                return map[data];
+
+            }},
+        ];
+        var params = {
+
+        }
+        jgrid_init($grid, config, params, 300, '/admin/role/' );
+
+
+    });
+</script>

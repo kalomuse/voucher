@@ -1,0 +1,14 @@
+{
+ "content":[
+        {"title":"推荐产品", 
+        "list":[
+            {"imgSrc":"../img/111.jpg","text":"休闲零食","url":"mdetals.html?dataid=10005"},
+            {"imgSrc":"../img/111.jpg","text":"休闲零食","url":"mdetals.html?dataid=10006"},
+            {"imgSrc":"../img/content1.png","text":"休闲零食","url":"mdetals.html?dataid=10005"},
+            {"imgSrc":"../img/111.jpg","text":"休闲零食","url":"mdetals.html?dataid=10005"},
+            {"imgSrc":"../img/content1.png","text":"休闲零食","url":"mine.html"},
+            {"imgSrc":"../img/111.jpg","text":"休闲零食","url":"mine.html"}
+            ]
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+<style>
+    article {
+        vertical-align: top;
+        width: 220px;
+        display: inline-block !important;
+        margin-left: 30px;
+        padding: 20px !important;
+    }
+    .role-list {
+        padding:10px 20px;
+    }
+    h3 {
+        text-align: center;
+    }
+    .line1 a{
+        margin: 0px 0px 20px 30px;
+
+    }
+</style>
+<div class="role-list">
+    <div class="line1"><a href="/admin/role/add_role" class="btn btn-primary">+ 角色</a></div>
+    {foreach $data as $v}
+    <article class="thumbnail"  id="{$v.id}">
+        <h3>{$v.name}</h3>
+        <a class="btn btn-primary" style="width:80px;" href="/admin/role/edit_role?id={$v.id}">编 辑</a>
+        <button class="btn btn-primary" style="width:80px;" onclick="del_depart({$v.id})">删 除</button>
+    </article>
+    {/foreach}
+
+</div>
+<script>
+    function del_depart(id) {
+
+        var r = confirm("确认删除");
+        if (r == true) {
+            $.post('/admin/role/delete_role', {id: id}, function(res) {
+                if(res.ok) {
+                    location.reload();
+                } else {
+                    alert('失败');
+                }
+            });
+        }
+
+    }
+</script>

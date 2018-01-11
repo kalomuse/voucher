@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>邀 请</title>
+    <link rel="stylesheet" type="text/css" href="/public/css/common.css" />
+    <style>
+        .ka-container {
+            text-align: center;
+            width: 100%;
+            position:absolute;
+            bottom:220px;
+        }
+        .ka-container h1 {
+            line-height: 50px;
+            font-size: 40px;
+            font-weight: 900px;
+        }
+        .ka-container h3 {
+            line-height: 35px;
+        }
+        .ka-container img {
+            display: block;
+            width: 100px;
+            height: 100px;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+        }
+        .ka-container button {
+            border-radius: 5px;
+            background-color: #FF2233;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+            font-size: 16px;
+            color: #fff;
+            width: 70%;
+            margin-top:20px;
+            margin-left: 15%;
+            border: none;
+            font-family: 微软雅黑;
+            display: block;
+        }
+        .ka-line {
+            width: 100px;
+            margin: 0 auto;
+            margin-top: 100px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="header">
+    <h1>
+        <a class="back" href="javascript:history.go(-1)"></a>
+        钱 包
+    </h1>
+</div>
+
+<div class="ka-container">
+    <div class="ka-line"><img src='{if $my.file}{$my.file}{else}__IMG__{$my.sex == '女'? '/wap_sex2.png': '/wap_sex1.png'}{/if}' /></div>
+    <h3>我的钱包</h3>
+    <h1>￥{$my['money']}元</h1>
+        <button>立即提现</button>
+</div>
+<script src="/public/js/jquery.min.js?v=2.1.4"></script>
+<script>
+    $('.ka-container button').click(function() {
+        $(this).attr('disabled', 'disabled');
+        var self = $(this);
+        $.ajax({
+            type : "POST",
+            url:"/base/pay/get_money",
+            data : {},
+            success: function(data) {
+                if(data.status == 'ok') {
+                    alert('提现成功，稍后红包将由公众号嘉善圈子发放至您的账号，注意查收');
+                    location.reload();
+                } else {
+                    alert(data.msg);
+                }
+                $(self).removeAttr('disabled');
+            }
+        });
+    });
+</script>
+</body>
+
+</html>
+

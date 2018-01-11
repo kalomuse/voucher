@@ -1,0 +1,73 @@
+<style>
+    .role_manage {
+        padding: 10px 20px;
+    }
+    .role_manage .select {
+        width: 120px;
+        display: inline-block;
+    }
+    .role_manage .title {
+        font-size:16px;
+        font-weight: 700;
+        border-bottom: 1px solid #eeeeee;
+        padding:10px;
+    }
+    .role_manage .content {
+        border-bottom: 1px solid #eeeeee;
+        padding:10px;
+    }
+    .role_manage span {
+        margin-right: 10px;
+    }
+    .role_manage #name {
+        margin-left:10px;
+    }
+    .role_manage button {
+        margin-top:20px;
+        margin-bottom: 50px;
+    }
+</style>
+<div class="role_manage">
+    <div class="title">部门名称<input type="text" id="name"></div>
+    {foreach $menu as $item}
+    <div class="title">{$item.str}</div>
+    <div class="content" id={$item.name}>
+        {foreach $item.child as $k=>$child}
+        <div class="select">
+            <span>{$child.str}</span><input type="checkbox" sid="{$k}">
+        </div>
+        {/foreach}
+    </div>
+
+    {/foreach}
+    <button class="btn btn-primary">确认提交</button>
+</div>
+<script>
+    $('.btn').click(function() {
+        var data = {
+            'name': $('#name').val(),
+            'role': {},
+        }
+        $('.content').each(function() {
+            var name = $(this).attr('id');
+            data.role[name] = {};
+            $(this).find('input').each(function() {
+                var sid = $(this).attr('sid');
+                if($(this).is(':checked'))
+                    data.role[name][sid] = 1;
+                else {
+                    data.role[name][sid] = 0;
+                }
+            })
+
+        });
+        $.post('/admin/role/add_role', data, function(res) {
+            if(res.ok) {
+                alert(res.msg);
+                location.href = '/admin/role/to';
+            } else {
+                alert('失败');
+            }
+        });
+    });
+</script>

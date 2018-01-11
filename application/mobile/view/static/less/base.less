@@ -1,0 +1,143 @@
+*{
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+@rem:32rem;
+.flex(){
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+}
+::-webkit-scrollbar{
+	display: none;//隐藏滚动条
+}
+img{
+	width: 100%;
+}
+[data-dpr='1'] main,[data-dpr='1'] header{
+	min-width: 320px;
+	max-width: 640px;
+}
+a:hover,a:focus{
+	color: #fff;
+	text-decoration: none;
+}
+html,body{
+	height: 100%;
+	width: 100%;
+}
+body{
+	.flex();
+	flex-direction:column;
+	align-items:center;
+
+}
+header,footer{
+
+
+	width: 100%;
+
+}
+header{
+
+
+	.header{
+		.flex();
+		padding: 10/@rem 10/@rem;
+		align-items:center;
+		background-color: #fff;
+		.h-left{
+			height: 20/@rem;
+			width: 20/@rem;
+			background: url('../img/headerimg/icon_back_n.png') no-repeat;
+			background-size: contain;
+		}
+		.h-mid{
+			flex:1;
+			text-align: center;
+		 	width: 50%;
+			font-size: 16/@rem;
+
+
+		}
+		.h-right a{
+			.flex();
+			height: 32/@rem;
+			align-items:center;
+			.h-icon{
+				color: #ccc;
+				font-size: 20/@rem
+			}
+		}
+
+	}
+}
+
+main{
+	position: relative;
+	flex:1;
+	width: 100%;
+
+	overflow-y: auto;
+
+
+}
+footer{
+	border-top: 1px solid #ccc;
+
+	ul{
+		.flex();
+		margin-bottom: 0;
+		width: 100%;
+		height: 100%;
+		li{
+			width: 25%;
+			a{
+				display: block;
+			}
+			.nav{
+				text-align: center;
+				padding: 5/@rem 0;
+				.icon{
+					width: 20/@rem;
+					height: 20/@rem;
+					overflow: hidden;
+					margin:0 auto 3/@rem;
+					background: url(../img/footerimg/spr1_5b2e09c.png);
+					background-size: 20/@rem 160/@rem;
+				}
+				span{
+					display: block;
+					color: #000;
+					font-size: 11/@rem;
+				}
+				.fl{
+					background-position-y:-20/@rem;
+				}
+                .fl-act{
+                  background-position-y:0/@rem;
+                }
+				.sy{
+					background-position-y:-140/@rem;
+				}
+                .sy-act{
+                  background-position-y:-120/@rem;
+                }
+				.cart{
+					background-position-y:-60/@rem;
+				}
+                .cart-act{
+                  background-position-y:-40/@rem;
+                }
+				.mine{
+					background-position-y:-100/@rem;
+				}
+                .mine-act{
+                  background-position-y:-80/@rem;
+                }
+			}
+		}
+	}
+}

@@ -1,0 +1,200 @@
+{include file="public/header"}
+
+<link rel="stylesheet" type="text/css" href="__STATIC__/less/mdetals.css">
+<link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css">
+<script src="/public/js/bootstrap.min.js"></script>
+<style>
+	.rule-div {
+		padding: 0.36rem;
+		font-size: 0.36rem;
+	}
+	.rule-div p{
+		color: red;
+	}
+	.rule-div .p1 {
+		color: black;
+		font-size: 0.45rem;
+	}
+    .top {
+        position: fixed;
+        top: 1.8rem;
+        right: 0.5rem;
+        z-index: 999;
+        line-height: 1rem;
+        text-align: center;
+    }
+    .top a {
+        display: block;
+        font-size:0.3rem;
+        color: white;
+        width: 1rem;
+        height:1rem;
+        border-radius: 50%;
+        background: black;
+        opacity: 0.6;
+    }
+</style>
+<main>
+    <!--banner start-->
+</main>
+<template>
+    <div class="content">
+        <img src="" class="img1">
+        <div class="hdcontent">
+            <div>够是啊都</div>
+            <div>
+						<span>
+							<span class="pricef">￥</span>
+							<span class="price">6</span>
+
+						原价
+						<em>500元</em>
+						,限量
+							<span class="num" style="color:red;">500</span>
+							份,已销售
+							<span class="xsnum">62</span>份
+						</span>
+            </div>
+            <div class="buy" onclick="buy();"><span>我要购买</span></div>
+            <div>购买截止日期：<span></span></div>
+            <div>活动规则
+            </div>
+            <div>
+
+            </div>
+
+        </div>
+        <img src="" class="img2">
+    </div>
+</template>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h5 class="modal-title" id="myModalLabel" style="">恭喜您已成功参与本次抽奖活动，要获取更多优惠券信息，请关注嘉善圈哦。</h5>
+            </div>
+            <!--<div class="modal-body" style="text-align: center"></div>-->
+            <img src="/public/img/local/qrcode.png">
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<img id="share" src="/public/img/local/share.png" style="position:absolute;top:0px;z-index:9999;display: none" >
+<script>
+	function join() {
+	    if(typeof has_share === 'undefined') {
+            $('#share').show();
+            return alert('请分享到朋友圈后，获取抽奖资格');
+        }
+
+        var name = $('#name').val(),
+			mobile = $('#mobile').val();
+        if(!name) {
+            return alert('请填写姓名');
+		} else if(!mobile) {
+            return alert('请填写手机号');
+		}
+	    $.post('/mobile/index/join' + location.search, {name:name, mobile:mobile}, function(res) {
+	        if(res.status == 'ok') {
+                $('#myModal').modal();
+            } else {
+	           alert(res.msg);
+            }
+		});
+	}
+    $(function(){
+        var dataid= getQueryString('dataid');
+        //数据加载
+        $.ajax({
+            url: location.search,
+            type:'post',
+            dataType:'json',
+            success:function(data){
+                var type = data.content[0].type;
+                if(data.content[0].type == 2 || data.content[0].type == 1){ //买
+                    var brach=$('main');
+                    brach.html("");
+                    var data=data.content[0].list;
+                    var list=$($('template').html());
+                    list.find('.img1').attr('src',data[0].src);
+                    list.find('.hdcontent div:nth-child(1)').text(data[0].text);
+                    list.find('.price').text(data[0].price);
+                    list.find('em').text(data[0].oldprice);
+                    list.find('.num').text(data[0].num);
+                    list.find('.xsnum').text(data[0].xsnum);
+                    list.find('.hdcontent div:nth-child(4) span').text(data[0].buydate);
+                    list.find('.hdcontent div:nth-child(5) span').text(data[0].usedate);
+
+                    var ullist=$('<ul></ul>');
+                    var bz=data[0].bz;
+                    var array=bz.split(';');
+                    for(var i = 0;i <array.length;i++){
+
+                        ullist.append("<li>"+array[i]+"</li>");
+                    }
+                    list.find('.hdcontent div:nth-child(6)').append(ullist);
+                    list.find('.img2').attr('src',data[0].src1);
+                    brach.append(list);
+                    if(type == 1) {
+                        $('.buy span').html('立即领取');
+                    }
+                }else if(data.content[0].type == 0){ //抽
+                    var brach=$('main');
+                    brach.html("");
+                    var data=data.content[0].list;
+
+
+                    var divcontent=$('<div class="dhqcontent"></div>');
+                    var divcontent2=$('<div class="dhqcontent" style="align-items:flex-start;"></div>');
+                    var img=$('<img></img>');
+                    img.attr('src',data[0].src);
+                    divcontent.append(img);
+                    var div = $('<div class="title"><div>加油，已有<span></span>人报名</div></div>');
+                    divcontent.append(div);
+                    if(!data[0].is_end){
+                        var name = $('<input type="text" id="name" name="" placeholder=" 输入姓名"> ');
+                        var tel = $('<input type="text" id="mobile" name="" placeholder=" 输入电话">');
+                        var but = $('<div class="btn" onclick="join()"><span>立即抽奖</span></a>');
+                        divcontent.append(name);
+                        divcontent.append(tel);
+                        divcontent.append(but);
+                    } else {
+                        divcontent.append('<div style="padding: 0.4rem;"><p style="color:red;font-size:0.5rem;">本活动已结束，请中奖的用户凭兑换码至商家消费，谢谢参与！</p></div>');
+                    }
+
+                    div.find('span').text(data[0].rsnum);
+                    var img2=$('<img></img>');
+                    var rule="<div class='rule-div'><p class='p1'>活动规则：</p><div>" + data[0].rule + "</div></div>";
+                    img2.attr('src',data[0].src1);
+
+                    divcontent2.append(rule);
+                    divcontent2.append(img2);
+                    brach.append(divcontent);
+                    brach.append(divcontent2);
+
+                }
+                brach.append('<div class="top"><a href="/mobile/index/tousu">投诉</a></div>');
+            },
+            error:function(data){
+                console.log(data);
+            }
+        })
+    })
+    function buy() {
+        $.ajax({
+            url: '/mobile/index/can_buy' + location.search,
+            type:'post',
+            dataType:'json',
+            success:function(res) {
+                if(res.status == 'ok') {
+                    location.href = '/base/pay/' + location.search;
+                } else {
+                    alert(res.msg);
+                }
+            }
+        });
+
+    }
+</script>
+{include file="public/footer"}

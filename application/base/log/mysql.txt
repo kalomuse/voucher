@@ -1,0 +1,238 @@
+
+CREATE TABLE `rand_voucher` (
+    id int(11) unsigned not null auto_increment,
+    rule text not null  COMMENT '规则',
+    total int(6) default 1 not null COMMENT '总发放数量',
+    shop varchar(256) not null COMMENT '店铺名称',
+    item varchar(256) not null COMMENT '商品名称',
+    title varchar(256) not null COMMENT '活动标题',
+    end_time datetime not null  COMMENT '开奖时间',
+    file text not null  COMMENT '活动图片，以逗号分割',
+    other varchar(256) not null  COMMENT '其他',
+    remark varchar(256) not null COMMENT '类型标记',
+
+    created_time datetime default CURRENT_TIMESTAMP,
+    modified_time datetime default CURRENT_TIMESTAMP,
+    deleted int(4) unsigned default 0,
+    is_end int(1) default 0 not null,
+    `price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '字段补全，无用处',
+    `old_price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '优惠券现价',
+    primary key(id)) DEFAULT CHARSET=utf8;
+
+    alter table rand_voucher add `price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '优惠券现价';
+    alter table rand_voucher add `old_price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '优惠券现价';
+
+CREATE TABLE `buy_voucher` (
+    id int(11) unsigned not null auto_increment,
+    rule text not null COMMENT '规则',
+    total int(6) default 1 not null COMMENT '总发放数量',
+    shop varchar(256) not null COMMENT '店铺名称',
+    item varchar(256) not null COMMENT '商品名称',
+    title varchar(256) not null COMMENT '活动标题',
+    end_time datetime not null COMMENT '活动结束时间',
+    file text not null COMMENT '活动图片，以逗号分割',
+    other varchar(256) not null,
+    remark varchar(256) not null COMMENT '类型标记',
+
+    created_time datetime default CURRENT_TIMESTAMP,
+    modified_time datetime default CURRENT_TIMESTAMP,
+    deleted int(4) unsigned default 0,
+    is_end int(1) default 0 not null,
+    `price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '优惠券现价',
+    `old_price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '优惠券现价',
+    primary key(id)) DEFAULT CHARSET=utf8;
+
+CREATE TABLE `shop_join` (
+    id int(11) unsigned not null auto_increment,
+    name varchar(64) not null COMMENT '店铺名称',
+    mobile varchar(16) not null COMMENT '手机号',
+    other varchar(256) not null COMMENT '其他',
+    remark varchar(256) not null COMMENT '备注',
+
+    created_time datetime default CURRENT_TIMESTAMP,
+    modified_time datetime default CURRENT_TIMESTAMP,
+    deleted int(4) unsigned default 0,
+    primary key(id)) DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `join` (
+    id int(11) unsigned not null auto_increment,
+    aid int(11) not null  COMMENT '活动id',
+    uid int(11) not null  COMMENT '报名人员id',
+    name varchar(32) default '' not null  COMMENT '姓名',
+    mobile varchar(11) default ''  not null  COMMENT '电话',
+    status int(4) default 1 not null COMMENT '状态：1：等待开奖2：已中奖, 未使用，3：未中奖4：已消费',
+    pwd char(6)  COMMENT '优惠券编码',
+    is_use int(1) default 0 not null COMMENT '是否使用',
+
+    created_time datetime default CURRENT_TIMESTAMP,
+    modified_time datetime default CURRENT_TIMESTAMP,
+    deleted int(4) unsigned default 0,
+    primary key(id)) DEFAULT CHARSET=utf8;
+
+CREATE TABLE `buy_join` (
+    id int(11) unsigned not null auto_increment,
+    aid int(11) not null COMMENT '活动id',
+    uid int(11) not null COMMENT '报名人员id',
+    name varchar(32) default '' not null COMMENT '姓名',
+    mobile varchar(11) default ''  not null COMMENT '电话',
+    status int(4) default 1 not null COMMENT '保留字段',
+    pwd char(6) COMMENT '优惠券编码',
+    is_use int(1) default 0 not null '是否已消费：0：未消费，1：已消费',
+
+    created_time datetime default CURRENT_TIMESTAMP,
+    modified_time datetime default CURRENT_TIMESTAMP,
+    deleted int(4) unsigned default 0,
+    primary key(id)) DEFAULT CHARSET=utf8;
+
+//用户表
+CREATE TABLE `user` (
+    id int(11) unsigned not null auto_increment,
+    `role` varchar(128) default '' COMMENT '角色',
+    `mobile` char(11) NOT NULL DEFAULT '' COMMENT '手机号码',
+    `wechat` varchar(50) NOT NULL DEFAULT '' COMMENT '微信',
+    `password` char(32) NOT NULL DEFAULT '' COMMENT '密码',
+    `email` char(32) NOT NULL DEFAULT '' COMMENT '邮箱',
+    `money` decimal(10,2) NOT NULL DEFAULT 0 COMMENT '账户余额',
+    `vip` int(4) unsigned NOT NULL DEFAULT '0' COMMENT '会员等级',
+    `point` int(8) unsigned NOT NULL DEFAULT '0' COMMENT '会员积分',
+    `car` varchar(32) DEFAULT '' COMMENT '车牌号',
+    `reg_time` datetime default CURRENT_TIMESTAMP COMMENT '注册时间',
+    `openid` varchar(100) DEFAULT '' COMMENT '三方登录',
+    `oauth` varchar(10)  COMMENT '三方登录APP',
+    `last_login` varchar(16) COMMENT '上次登录时间',
+    `is_lock` tinyint(1) COMMENT '是否锁定',
+    `name` varchar(16) COMMENT '名字',
+    `sex` varchar(2) NOT NULL DEFAULT '' COMMENT '性别',
+    `address` varchar(32) comment '户籍所在地',
+    `birth` varchar(10) comment '出生年月',
+    `birth_time` varchar(10) comment '出生时间',
+    `work` varchar(32) comment '职业',
+    `duties` varchar(32) comment '工作单位',
+    `education` varchar(32) comment '学历',
+    `income` varchar(32) comment '年薪',
+    `height` int(3) comment '身高',
+    `weight` int(3) comment '体重',
+    `introduction` varchar(256) comment '最重要条件',
+    `import` varchar(256) comment '最重要条件',
+    `file` varchar(256) DEFAULT '' COMMENT '头像',
+    `old` int(3) COMMENT '年龄',
+    `number` int(10) comment '编号',
+    `character` varchar(10) comment '性格',
+    `status` int(3) default 1 COMMENT '会员状态 1：完成手机号密码11：完成信息填写 16：通过信息审核',
+    `level` int(3) default 0 COMMENT '会员等级  2:金牌会员 3:铂金会员 5:钻石会员',
+    `is_pay` int(1) default 0 COMMENT '是否已支付 0：未支付1：已支付2：已退费',
+    `review` int(1) default 0 COMMENT '身份审核 0：审核中：1：审核通过，2:审核不通过',
+    `leader` varchar(32) DEFAULT '' comment '领进来的人',
+    `is_distribut` int(1) DEFAULT 0 comment '是否分配',
+    `get_money` decimal(10,2) DEFAULT 0 comment '获得的钱',
+    `from`  varchar(16) comment '来自哪个三方平台',
+    `reg_distribut` int(1) DEFAULT 0 comment '注册送红包',
+    `count` int(5) DEFAULT 0 comment '邀请的人',
+    `area` varchar(32) DEFAULT 0 comment '地区',
+    `unionid`  varchar(32) DEFAULT 0 comment '唯一id',
+    `subscribe`  int(1) DEFAULT 0 comment '是否订阅',
+    `money_openid`  varchar(100) DEFAULT '' comment '发钱公众号的openid',
+    `alias`  varchar(100) DEFAULT '' comment '地区的别称',
+    `vip_time` int(10) DEFAULT 0 comment 'vip过期',
+    created_time datetime default CURRENT_TIMESTAMP,
+    modified_time datetime default CURRENT_TIMESTAMP,
+    deleted int(4) unsigned default 0,
+    primary key(id)) DEFAULT CHARSET=utf8;
+
+
+ CREATE TABLE `bill` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `is_get` int(3) DEFAULT '0' COMMENT '类型0：支出1：收入',
+  `type` int(3) DEFAULT '0' COMMENT '类型1：会员收入2：101：中介小费',
+  `amount` decimal(10,2) DEFAULT '0.00' COMMENT '金额',
+  `order_id` int(10) NOT NULL COMMENT '订单id',
+  `userid` int(10) DEFAULT '0' COMMENT '用户id',
+  `area` varchar(64) NOT NULL COMMENT '地区',
+  `has_pay` int(3) DEFAULT '1' COMMENT '红包是否已发放',
+  `created_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `modified_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `deleted` int(4) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `orders` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `order_sn` varchar(32) NOT NULL,
+  `transaction_id` varchar(32) NOT NULL COMMENT '微信订单号',
+  `aid` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '活动id',
+  `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `name` varchar(64) COMMENT '用户名字',
+  `mobile` char(11) NOT NULL DEFAULT '' COMMENT '手机号码',
+  `server_name` varchar(255) NOT NULL DEFAULT '' COMMENT '商品名',
+  `goods_price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '商品单价',
+  `goods_num` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '商品数量',
+  `pay_status` int(4) unsigned NOT NULL DEFAULT '0' COMMENT '支付状态',
+  `pay_name` varchar(120) NOT NULL DEFAULT '' COMMENT '支付方式名称',
+  `order_prom_amount` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '活动优惠金额',
+  `order_amount` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '应付款金额',
+  `total_amount` decimal(10,2) DEFAULT '0.00' COMMENT '订单总价',
+  `type` int(3) default 0 comment '参考bill type',
+  `is_get` int(3) default 0 comment '参考bill is_get',
+  `area` varchar(64) not null  COMMENT '地区',
+  `other` varchar(32) comment '其他额外数据',
+
+  `add_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '下单时间',
+  `pay_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '支付时间',
+
+  `created_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `modified_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `deleted` int(4) unsigned DEFAULT '0',
+  primary key(id)) DEFAULT CHARSET=utf8;
+
+  alter table orders add `aid` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '活动id',
+
+create table role (
+    id int(11) unsigned not null auto_increment,
+    user_id int(11),
+    name varchar(32),
+    role varchar(128),
+    `area` varchar(64) not null  COMMENT '地区',
+
+    created_time datetime default CURRENT_TIMESTAMP,
+    modified_time datetime default CURRENT_TIMESTAMP,
+    deleted int(4) unsigned default 0,
+    primary key(id));
+
+
+CREATE TABLE `admin` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL COMMENT '所属公司id',
+  `area` varchar(64) not null  COMMENT '地区',
+  `role` text COMMENT '角色',
+  `username` char(20) NOT NULL DEFAULT '' COMMENT '用户名',
+  `password` char(32) NOT NULL DEFAULT '' COMMENT '密码',
+  `nickname` char(20) NOT NULL DEFAULT '' COMMENT '昵称',
+  `email` char(32) NOT NULL DEFAULT '' COMMENT '邮箱',
+  `mobile` char(11) NOT NULL DEFAULT '' COMMENT '手机号码',
+  `created_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `modified_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `deleted` int(4) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `msg` (
+    id int(11) unsigned not null auto_increment,
+    uid varchar(256) not null,
+    content text not null,
+    type varchar(32) not null,
+    is_send int(1) default 0,
+    is_read int(1) default 0,
+    other varchar(256) not null,
+    remark varchar(256) not null,
+
+    created_time datetime default CURRENT_TIMESTAMP,
+    modified_time datetime default CURRENT_TIMESTAMP,
+    deleted int(4) unsigned default 0,
+    primary key(id)) DEFAULT CHARSET=utf8;
+
+
+
+
+
+

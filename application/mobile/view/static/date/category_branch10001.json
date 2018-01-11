@@ -1,0 +1,12 @@
+{
+ "content":[
+        {"title":"猜你喜欢",
+          "list":[
+                {"imgSrc":"../img/content1.png","text":"专场推荐","url":"mdetals.html?dataid=10005"},
+                {"imgSrc":"../img/content2.png","text":"专场推荐","url":"mdetals.html?dataid=10006"},
+                {"imgSrc":"../img/content1.png","text":"专场推荐","url":"mdetals.html?dataid=10005"},
+                {"imgSrc":"../img/content3.png","text":"专场推荐","url":"mdetals.html?dataid=102"}
+            ]
+        }
+    ]
+}

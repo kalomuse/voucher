@@ -1,0 +1,136 @@
+<style>
+    #edit_table_list_2 {
+        display: none;
+    }
+
+    .upload_file_btn {
+        font-size: 10px;
+
+    }
+    .close-sty {
+        position: absolute;top:-3px;right:10px; color:red;opacity:1;z-index: 999;
+    }
+    .file-div {
+        position: relative;
+    }
+    #editmodtable_list_2 {
+        overflow: auto !important;
+
+        bottom: 100px;
+    }
+</style>
+<!-- jqgrid-->
+<link href="/public/css/jqgrid/ui.jqgrid.css?0820" rel="stylesheet">
+<script>
+    var id = 1, type = 'user', $list = $('.uploader-list');
+    function dian(self) {
+        var is_create = $(self).attr('is_create');
+        if(is_create == 1) {
+            $list = $(self).parents('td');
+            var url = '/base/upload/img?type=' + type + '&is_create=' + is_create;
+            uploader.option('server', url);
+            $('.webuploader-element-invisible').click();
+        } else {
+            id = $(self).parents('tr').attr('id');
+            uploader.option('server', '/base/upload/img?id=' + id + '&type=' + type);
+            $list = $(self).parents('td');
+            $('.webuploader-element-invisible').click();
+        }
+    }
+</script>
+<link rel="stylesheet" type="text/css" href="/public/js/webuploader/webuploader.css?v=21">
+<link rel="stylesheet" type="text/css" href="/public/js/webuploader/webuploader-demo.css">
+<div id="uploader" class="wu-example" style="display: none">
+    <div id="thelist" class="uploader-list"></div>
+    <div class="btns">
+        <div id="picker">选择文件</div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="jqGrid_wrapper">
+                <table id="table_list_2"></table>
+                <div id="pager_list_2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- webuploader -->
+<script src="/public/js/webuploader/webuploader.min.js"></script>
+<script src="/public/js/webuploader/fileUpload-demo.js?v=5"></script>
+<!-- jqGrid -->
+<!--<script src="/public/js/editable-table.js"></script>-->
+<script src="/public/js/jqgrid/i18n/grid.locale-cn.js?0820"></script>
+<script src="/public/js/jqgrid/jquery.jqGrid.min.js?0828"></script>
+<script src="/public/js/table.js?v=32"></script>
+<!-- Page-Level Scripts -->
+<script>
+    function file_delete(self) {
+        var r=confirm("确认删除？")
+        if (r==true) {
+            var index = $(self).parents('.file-div').index(),
+                id = $(self).parents('tr').attr('id');
+            $.post('/admin/user/delete_file', {'id':id, 'index':index}, function(res) {
+                $(self).parents('.file-div').remove();
+            });
+
+        }
+    };
+    $(document).ready(function () {
+        var id = "table_list_2";
+        $grid = $("#table_list_2");
+        var config = [
+            {'str': '编号', 'name': 'id', 'align':'id', editable:false, align:'center'},
+            {'str': '手机', 'name': 'mobile', 'align':'center'},
+            {'str': '昵称', 'name': 'name', 'align':'center'},
+            {'str': '农历出生年月',name:'birth',  formatter: 'date',
+                formatoptions: { newformat: 'Y-m-d'}, 'align':'center'},
+            {'str': '出生时间',name:'birth',  formatter: 'date',
+                formatoptions: { newformat: 'Y-m-d'}, 'align':'center'},
+            {'str': '车牌',name:'car', 'align':'center'},
+            {'str': '是否vip', 'name': 'level', 'align':'center', formatter: function (data) {
+                return parseInt(data)==0?'否':'是'
+            }
+            },
+
+        ];
+        var params = {
+                onInitializeForm : function (form) {
+                    $('#tr_file').remove();
+                    $('#tr_date input').val(getNowFormatDate());
+                    var str = '<a onclick="dian(this)" is_create="1" id="dialog_upload">选择文件</a>';
+                    form.find('tbody').append('<tr class="FormData" id="tr_file"><td class="CaptionTD"><label for="file">文件上传</label></td><td class="DataTD">'+str+'</td></tr>');
+                },
+                beforeSubmit: function (postdata, formid) {
+                    delete postdata[$grid.attr('id') + '_id'];
+                    postdata['oper'] = 'add';
+                    var is_create = parseInt($('#dialog_upload').attr('is_create')), id='';
+                    if(!is_create) {
+                        postdata['oper'] = 'edit';
+                        var id = $('#dialog_upload').parents('tr').attr('id');
+                    }
+                    $.post('/admin/user/ajax_edit?is_create=' + is_create + '&id=' + id, postdata, function (res) {
+                        $grid.addRowData(res.id, postdata, 'first');
+                        if(res.file) {
+                            location.reload();
+                        }
+                        $(".ui-jqdialog-titlebar-close").trigger('click');
+
+                    });
+                },
+
+            },
+            other = {
+                edit: false,
+                add: true,
+                del: false,
+                search: true,
+            }
+        jgrid_init($grid, config, params, 0, '/admin/user/' , '#pager_list_2', null, {cellEdit : false},other );
+
+    });
+
+</script>

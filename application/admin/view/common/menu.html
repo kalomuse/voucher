@@ -1,0 +1,50 @@
+
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="nav-close"><i class="fa fa-times-circle"></i>
+    </div>
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                            <span class="block m-t-xs" style="font-size:20px;">
+                                <i class="fa fa-area-chart"></i>
+                                <strong class="font-bold">后台管理系统</strong>
+                            </span>
+                        </span>
+                    </a>
+                </div>
+                <div class="logo-element">后台管理系统
+                </div>
+            </li>
+            <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                <span class="ng-scope">管理</span>
+            </li>
+            <!--<li>
+                <a class="J_menuItem" href="index_v1.html">
+                    <i class="fa fa-home"></i>
+                    <span class="nav-label">品类管理</span>
+                </a>
+            </li>-->
+
+            {foreach name='access_menu' item='m'}
+            <li class="{if condition="$module == $m.name"}active {/if}">
+                <a href="#"><i class="fa {$m.icon}"></i> <span class="nav-label">{$m.str}</span><span class="fa arrow"></span></a>
+                <span class="fa arrow"></span>
+                <ul class="nav nav-second-level collapse {if condition="$module == $m.name"}in {/if}" >
+                {foreach $m.child as $k => $v}
+                    <li class="{if condition="$action eq $v.action"}active {/if}">
+                        <a class="J_menuItem" href="/admin/{$m.name}/{$v.action}{if isset($v.params)}?{$v.params}{/if}">{$v.str}</a>
+                    </li>
+                {/foreach}
+                </ul>
+
+            </li>
+            {/foreach}
+            <!--<li>
+                <a href="/admin/user"><i class="fa fa-edit"></i> <span class="nav-label">人员管理</span></a>
+            </li>-->
+        </ul>
+    </div>
+</nav>

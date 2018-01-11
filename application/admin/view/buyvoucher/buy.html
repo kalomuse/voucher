@@ -1,0 +1,174 @@
+<style>
+    #edit_table_list_2 {
+        display: none;
+    }
+
+    .upload_file_btn {
+        font-size: 10px;
+
+    }
+    .close-sty {
+        position: absolute;top:-3px;right:10px; color:red;opacity:1;z-index: 999;
+    }
+    .file-div {
+        position: relative;
+    }
+    #editmodtable_list_2 {
+        overflow: auto !important;
+
+        bottom: 100px;
+    }
+</style>
+<!-- jqgrid-->
+<link href="/public/css/jqgrid/ui.jqgrid.css?0820" rel="stylesheet">
+<script>
+    var id = 1, type = 'buy_voucher', $list = $('.uploader-list');
+    function dian(self) {
+        var is_create = $(self).attr('is_create');
+        if(is_create == 1) {
+            $list = $(self).parents('td');
+            var url = '/base/upload/img?type=' + type + '&is_create=' + is_create;
+            uploader.option('server', url);
+            $('.webuploader-element-invisible').click();
+        } else {
+            id = $(self).parents('tr').attr('id');
+            uploader.option('server', '/base/upload/img?id=' + id + '&type=' + type);
+            $list = $(self).parents('td');
+            $('.webuploader-element-invisible').click();
+        }
+    }
+</script>
+<link rel="stylesheet" type="text/css" href="/public/js/webuploader/webuploader.css?v=21">
+<link rel="stylesheet" type="text/css" href="/public/js/webuploader/webuploader-demo.css">
+<div id="uploader" class="wu-example" style="display: none">
+    <div id="thelist" class="uploader-list"></div>
+    <div class="btns">
+        <div id="picker">选择文件</div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="jqGrid_wrapper">
+                <table id="table_list_2"></table>
+                <div id="pager_list_2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- webuploader -->
+<script src="/public/js/webuploader/webuploader.min.js"></script>
+<script src="/public/js/webuploader/fileUpload-demo.js?v=5"></script>
+<!-- jqGrid -->
+<!--<script src="/public/js/editable-table.js"></script>-->
+<script src="/public/js/jqgrid/i18n/grid.locale-cn.js?0820"></script>
+<script src="/public/js/jqgrid/jquery.jqGrid.min.js?0828"></script>
+<script src="/public/js/table.js?v=32"></script>
+<script src="/public/js/base64.js"></script>
+<!-- Page-Level Scripts -->
+<script>
+    function file_delete(self) {
+        var r=confirm("确认删除？")
+        if (r==true) {
+            var index = $(self).parents('.file-div').index(),
+                id = $(self).parents('tr').attr('id');
+            $.post('/admin/buyvoucher/delete_file', {'id':id, 'index':index}, function(res) {
+                $(self).parents('.file-div').remove();
+            });
+
+        }
+    };
+    $(document).ready(function () {
+        var id = "table_list_2";
+        $grid = $("#table_list_2");
+        var config = [
+            {'str': '活动规则', 'name': 'rule', 'edittype': 'textarea', editoptions: {rows:"8",cols:"50"}},
+            {'str': '活动标题', 'name': 'title', 'align':'center'},
+            {'str': '店铺名称', 'name': 'shop', 'align':'center'},
+            {'str': '优惠券名称', 'name': 'item', 'align':'center'},
+            {'str': '总发放数量', 'name': 'total', 'align':'center'},
+            {'str': '原价', 'name': 'old_price', 'align':'center'},
+            {'str': '现价', 'name': 'price', 'align':'center'},
+            {'str': '活动截止日期', 'name': 'end_time', 'align':'center'},
+            {
+                'str':'图片',
+                name: 'file',
+                width: 300,
+                classes: 'file_mark',
+                formatter: function (data) {
+                    var str = '';
+                    if(data) {
+                        var files = data.split(',');
+                        for (index in files) {
+                            var file = files[index].split('||');
+                            if (file && file[0] && file[1]) {
+                                var end = file[1].split('.');
+                                end = end[end.length - 1];
+                                str += '<div class="file-div">' +
+                                    '<a target= _blank href="' + file[0] + '">' + file[1] + '</a>' +
+                                    '<button type="button" class="close close-sty" aria-label="Close"  onclick="file_delete(this);"><span aria-hidden="true">&times;</span></button> ' +
+                                    '</div>';
+
+                            }
+                        }
+                    }
+                    return str;
+                },editable: false,
+            },
+            {'str': '上传', 'name':'upload', formatter: function (data) {
+                return '<a onclick="dian(this)">选择文件</a>'
+            },editable: false,width:70,
+            },
+            {'str': '使用页面地址', 'name': 'id', 'align':'center', formatter: function (data) {
+                if(data) {
+                    var b = new Base64();
+                    var str = b.encode(data.toString());
+                    return 'http://voucher.tikyy.com/mobile/index/vlist?type=buy&code=' + str;
+                } else {
+                    return '';
+                }
+            },editable: false, width:400},
+            {'str': '购买名单列表', 'align':'center', editable: false,'name': 'id', 'align':'id',formatter: function (data) {
+                return '<a href="/admin/buyvoucher/buylist?id=' + data + '">详情</a>'
+            }},
+
+        ];
+        var params = {
+                onInitializeForm : function (form) {
+                    $('#tr_file').remove();
+                    $('#tr_date input').val(getNowFormatDate());
+                    var str = '<a onclick="dian(this)" is_create="1" id="dialog_upload">选择文件</a>';
+                    form.find('tbody').append('<tr class="FormData" id="tr_file"><td class="CaptionTD"><label for="file">文件上传</label></td><td class="DataTD">'+str+'</td></tr>');
+                },
+                beforeSubmit: function (postdata, formid) {
+                    delete postdata[$grid.attr('id') + '_id'];
+                    postdata['oper'] = 'add';
+                    var is_create = parseInt($('#dialog_upload').attr('is_create')), id='';
+                    if(!is_create) {
+                        postdata['oper'] = 'edit';
+                        var id = $('#dialog_upload').parents('tr').attr('id');
+                    }
+                    $.post('/admin/buyvoucher/ajax_edit?is_create=' + is_create + '&id=' + id, postdata, function (res) {
+                        $grid.addRowData(res.id, postdata, 'first');
+                        if(res.file) {
+                            location.reload();
+                        }
+                        $(".ui-jqdialog-titlebar-close").trigger('click');
+
+                    });
+                },
+
+            },
+            other = {
+                edit: true,
+                add: true,
+                del: true,
+                search: true,
+            }
+        jgrid_init($grid, config, params, 0, '/admin/buyvoucher/' , '#pager_list_2', null, {cellEdit : true},other );
+
+    });
+
+</script>

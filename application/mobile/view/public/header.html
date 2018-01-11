@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>网友福利，优惠促销进行中...</title>
+    <script src="__STATIC__/lib/js/flexible.js"></script>
+    <script src="__STATIC__/lib/js/jquery.js"></script>
+
+    <script src="__STATIC__/lib/js/carousel.js"></script>
+    <script src="__STATIC__/lib/js/transition.js"></script>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/lib/css/bootstrap.min.css">
+</head>
+<body>
+<header>
+    <div class="header">
+        <!--<a href="index.html">
+            <div class="h-left">
+            </div>
+        </a>-->
+        <div class="h-mid"></div>
+        {if $tab=='history'}
+        <div class="h-right">
+            <div class="listslide actived">商品</div>
+            <div class="listslide">优惠</div>
+        </div>
+        {else}
+        <div class="h-right">
+            <div class="listslide ">优惠券</div>
+            <div class="listslide">抽奖券</div>
+            <div class="listslide">订单</div>
+
+        </div>
+        {/if}
+
+
+    </div>
+
+</header>

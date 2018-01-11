@@ -1,0 +1,206 @@
+body {
+    background: #fff;
+}
+.submit {
+    border-radius: 5px;
+    background-color: #FF2233;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    color: #fff;
+    width: 70%;
+    margin-top:40px;
+    margin-left: 15%;
+    border: none;
+    font-family: 微软雅黑;
+    display: block;
+}
+.list{
+    background-color: #fff;
+    border-top: 1px solid #DDD8CE;
+    border-bottom: 1px solid #DDD8CE;
+    margin: 10px 0 0;
+}
+.kv_box_1{
+    padding: 10px;
+}
+.kv_box_1 h3{
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #101010;
+}
+.kv_box_1 .dd_desc{
+    font-size: 12px;
+    color: #999;
+}
+.b_border{
+    border-bottom: 1px dashed #DDD8CE;
+}
+.pay_style{
+    margin: 0 10px;
+    height: 42px;
+    position: relative;
+    display: block;
+}
+.pay_style .vip_icon{
+    position: absolute;
+    top: 11px;
+    line-height: 20px;
+    padding-left: 5px;
+    font-size: 14px;
+
+}
+.pay_style .pay_icon{
+    background-image: url("/public/img/local/pay_icon.png");
+    background-repeat: no-repeat;
+    background-size: 20px 40px;
+    -moz-background-size: 20px 40px;
+    -webkit-background-size: 20px 40px;
+    height: 20px;
+    position: absolute;
+    top: 11px;
+    left: 0;
+    line-height: 20px;
+    padding-left: 30px;
+    font-size: 14px;
+    color: #666;
+}
+.wx{
+    background-position: 0 0;
+}
+.alipay{
+    background-position: 0 -20px;
+}
+.pay_check{
+    background-image: url("/public/img/local/pay_icon_2.png");
+    background-repeat: no-repeat;
+    background-size: 60px 20px;
+    -moz-background-size: 60px 20px;
+    -webkit-background-size: 60px 20px;
+    height: 20px;
+    width: 20px;
+    font-size: 14px;
+    color: #666;
+}
+.yes{
+    background-position: -20px 0;
+    position: absolute;
+    top: 11px;
+    right: 0;
+}
+.no{
+    background-position: 0 0;
+    position: absolute;
+    top: 11px;
+    right: 0;
+}
+.kv_box_2{
+    height: 42px;
+    display: block;
+    padding: 0 10px;
+}
+.kv_box_2 .djq_name{
+    font-size: 14px;
+    color: #666;
+    line-height: 42px;
+    float: left;
+    margin-left: 5px;
+}
+.djq{
+    background-position: -40px 0;
+    float: left;
+    margin-top: 11px;
+}
+.kv_box_2 .djq_info{
+    float: right;
+    font-size: 12px;
+    color: #ff0000;
+    line-height: 42px;
+    margin-right: 10px;
+}
+
+.detail_list{
+    margin: 0 10px;
+    border-bottom: 1px dashed #DDD8CE;
+}
+.detail_list li{
+    height: 30px;
+    line-height: 30px;
+    color: #666;
+    font-size: 12px;
+}
+.detail_list li .p_name{
+    float: left;
+    width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.detail_list li .p_count{
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+.detail_list li .p_jinE{
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+.voucher_list{
+    margin: 0 10px;
+    height: 40px;
+    line-height: 40px;
+    color: #ff7200;
+    font-size: 12px;
+}
+.voucher_list .v_name{
+    float: left;
+    width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.voucher_list .v_jinE{
+    float: right;
+    width: 20%;
+    text-align: center;
+}
+.all_part{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 40px;
+    width: 100%;
+    background-color: #ffffff;
+}
+.all_part .all_money{
+    float: left;
+    width: 60%;
+    line-height: 40px;
+    text-align: right;
+    font-size: 12px;
+    color: #666;
+}
+.all_part .all_money span{
+    font-weight: 600;
+    color: #ff7200;
+    font-size: 18px;
+    margin-left: 5px;
+    margin-right: 10px;
+    -moz-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
+}
+.all_part .confirmBtn{
+    float: right;
+    width: 40%;
+    background-color: #ff7200;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    height: 40px;
+}
+.word_part{
+    margin: 5px 10px 0;
+}
